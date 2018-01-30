@@ -1,0 +1,19 @@
+<form (ngSubmit)="formSubmit()" [formGroup]="form" >
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input autofocus id="username" class="form-control" type="text" formControlName="username" [(ngModel)]="username">
+    </div>
+    <div class="form-group">
+      <span style="display: block" *ngIf="!matchingPasswords" >Passwords did not match!</span>
+      <label for="password">Password:</label>
+      <input #passwordBox id="password" class="form-control" type="password" formControlName="password" [(ngModel)]="password">
+    </div>
+    <div class="form-group">
+        <label for="password-repeat">Re-enter Password:</label>
+        <input id="password-repeat" class="form-control" type="password" formControlName="passwordRepeat" [(ngModel)]="passwordRepeat">
+      </div>
+    <button [disabled]="form.invalid" class="btn btn-primary" type="submit">Register</button>
+  </form>
+
+
+<h6 routerLink="/" ><a>Back to home</a></h6>
