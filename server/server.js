@@ -9,7 +9,7 @@ const express = require('express'),
       passport = require('passport'),
       LocalStrategy = require('passport-local'),
       mongo = require('mongodb'),
-      config = require('./.config'),
+      config = require('../.config'),
       mongoose = require('mongoose');
       mongoose.connect('mongodb://localhost:27017/authentication');
 
@@ -35,6 +35,16 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
+
+// app.post('/users/register', (req, res) => {
+//   console.log('register hit!');
+//   let username = req.body.username,
+//       password = req.body.password;
+
+//   console.log(username);
+//   console.log(password);
+//   res.status(200).json('register!');
+// });
 
 app.listen(3001, () => {
   console.log('working');

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { ElementRef } from '@angular/core';
+import { RegisterService } from './register.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   matchingPasswords = true;
   @ViewChild('passwordBox') passwordBox: ElementRef;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private registerService: RegisterService) { }
 
   ngOnInit() {
     this.formInit();
@@ -41,6 +42,10 @@ export class RegisterComponent implements OnInit {
       this.passwordBox.nativeElement.focus();
     } else {
       this.matchingPasswords = true;
+      this.registerService.saveUser({
+        username: this.username,
+        password: this.password
+      });
       console.log('form successfully submitted!');
     }
 

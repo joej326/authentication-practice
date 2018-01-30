@@ -6,9 +6,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './users/register/register.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './users/login/login.component';
+import { RegisterService } from './users/register/register.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes = [
   {path: '', component: HomeComponent},
@@ -31,9 +33,10 @@ const routes = [
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
