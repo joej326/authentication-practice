@@ -1,10 +1,8 @@
 const express = require('express'),
+      jwt = require('express-jwt'),
       path = require('path'),
       cookieParser = require('cookie-parser'),
       bodyParser = require('body-parser'),
-      exphbs = require('express-handlebars'),
-      expressValidator = require('express-validator'),
-      flash = require('connect-flash'),
       session = require('express-session'),
       passport = require('passport'),
       LocalStrategy = require('passport-local'),
@@ -33,8 +31,17 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+const authCheck = jwt({ // this string is auth0 client secret
+  secret: new Buffer(config.auth0.clientSecret, 'base64'),
+  audience: config.auth0.clientId // this is clientID
+});
+
 app.use('/', routes);
 app.use('/users', users);
+
+app.use('/protected', authCheck, (req, res) => {
+  res.json('hello this is protected');
+});
 
 // app.post('/users/register', (req, res) => {
 //   console.log('register hit!');

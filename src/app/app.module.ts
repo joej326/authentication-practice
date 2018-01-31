@@ -11,13 +11,17 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './users/login/login.component';
 import { RegisterService } from './users/register/register.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './auth0/auth.service';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes = [
   {path: '', component: HomeComponent},
+  {path: 'welcome', component: WelcomeComponent},
   {path: 'users', component: UsersComponent, children: [
     {path: 'register', component: RegisterComponent},
     {path: 'login', component: LoginComponent}
-  ]},
+  ]}
+
 ];
 
 
@@ -27,7 +31,8 @@ const routes = [
     UsersComponent,
     RegisterComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,10 @@ const routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [RegisterService],
+  providers: [
+    RegisterService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
